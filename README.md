@@ -6,6 +6,8 @@ parameters are two local files path.
 
 2.Use spark to train a machine learning model, and make predictions.
 
+3.Save result path as JSON
+
 command line:
 YOUR_SPARK_PATH/spark-submit --master local[4] K_means.py
 YOUR_INPUT_PATH/kmeans_data.txt
