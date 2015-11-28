@@ -1,6 +1,6 @@
 ### Usage Instruction:
 - Modify YOUR_INPUT_FILE_PATH and YOUR_OUTPUT_FILE_PATH parts in ReadOutputDemo.py
-- CD to your Spark file
+- Use terminal to cd to your Spark file
 - Type:
 ```
 ./bin/pyspark 
