@@ -68,10 +68,14 @@ elif(model_name == "Regression"):
 	precision = metrics.precision()
 	recall = metrics.recall()
 	f1Score = metrics.fMeasure()
+	confusion_matrix = metrics.confusionMatrix().toArray()
+
 	print("Summary Stats")
 	print("Precision = %s" % precision)
 	print("Recall = %s" % recall)
 	print("F1 Score = %s" % f1Score)
+	print(confusion_matrix)
+
 
 	# Statistics by class
 	labels = data.map(lambda lp: lp.label).distinct().collect()
@@ -89,10 +93,10 @@ elif(model_name == "Regression"):
 
 	print (dumpFilePath);
 	#save output file path as JSON and dump into dumpFilePath
-	res = [('regression',dumpFilePath, precision, recall, f1Score)]
+	res = [(precision, recall, f1Score,metrics.confusionMatrix())]
 	rdd = sc.parallelize(res)
 	SQLContext.createDataFrame(rdd).collect()
-	df = SQLContext.createDataFrame(rdd,['model_name','res_path', 'precision', 'recall', 'f1Score'])
+	df = SQLContext.createDataFrame(rdd,['precision', 'recall', 'f1Score','confusion_matrix'])
 	df.toJSON().saveAsTextFile(dumpFilePath)
 
 
