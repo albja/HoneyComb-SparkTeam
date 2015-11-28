@@ -1,0 +1,6 @@
+1 apple
+2 orange
+3 bear
+4 strawberry
+5 bread
+6 coffee
