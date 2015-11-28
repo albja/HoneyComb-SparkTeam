@@ -21,3 +21,8 @@ INSTRUCTION:
 3. Put Kmeans.py and kmeans_data.txt to some directory and run command line:
    YOUR_SPARK_PATH/spark-submit --master local[4] K_means.py
    YOUR_INPUT_PATH/kmeans_data.txt YOUR_OUTPUT_PATH/
+
+Resource:
+1. Deploy Spark: http://spark.apache.org/docs/latest/programming-guide.html
+2. Hadoop Version: http://spark.apache.org/docs/latest/hadoop-third-party-distributions.html
+3. Python API Docs: https://spark.apache.org/docs/1.5.2/api/python/index.html
