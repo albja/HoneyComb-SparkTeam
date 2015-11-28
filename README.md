@@ -1,5 +1,5 @@
 # SparkTeam
-basic version (NOT completed)
+Version 1.0
 
 1.Start spark via the command line with parameters, the input
 parameters are intput/output files path.
