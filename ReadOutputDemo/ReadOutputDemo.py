@@ -7,7 +7,7 @@ file = open('YOUR_INPUT_FILE_PATH', 'r')
 
 data = {}
 
-# read in data (two parameter each line) and print
+# read in data (two parameters each line) and print
 for line in file:
 
 	lineline = line.rstrip('\n')
