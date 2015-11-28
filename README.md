@@ -23,6 +23,9 @@ INSTRUCTION:
    YOUR_INPUT_PATH/kmeans_data.txt YOUR_OUTPUT_PATH/
 
 Resource:
+
 1. Deploy Spark: http://spark.apache.org/docs/latest/programming-guide.html
+
 2. Hadoop Version: http://spark.apache.org/docs/latest/hadoop-third-party-distributions.html
+
 3. Python API Docs: https://spark.apache.org/docs/1.5.2/api/python/index.html
