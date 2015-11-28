@@ -27,7 +27,7 @@ INSTRUCTION:
    MODEL_NAME: KMeans/Regression 
    
    For example:
-   .jacobLiu/HoneyPySpark/spark-1.5.2-bin-hadoop2.6/bin/spark-submit --master local[4] PySpark.py /Users/jacobliu/kmeans_data.txt /Users/jacobliu/kmeans KMeans
+   /bin/spark-submit /home/honeycomb/SparkTeam/PySpark.py /user/honeycomb/sparkteam/input/sample_multiclass_classification_data.txt /user/honeycomb/sparkteam/output1 Regression
 
 Resource:
 
