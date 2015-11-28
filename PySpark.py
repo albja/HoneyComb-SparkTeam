@@ -1,4 +1,6 @@
 import sys
+import os
+import shutil 
 from pyspark import SparkContext
 from pyspark.mllib.clustering import KMeans
 from pyspark.mllib.evaluation import MulticlassMetrics
@@ -24,6 +26,10 @@ SQLContext = SQLContext(sc)
 loadFilePath = sys.argv[1]		#input file path
 dumpFilePath = sys.argv[2]		#output file path
 model_name = sys.argv[3]		#model_name
+
+#if the directory already exists, remove
+if os.path.exists(dumpFilePath):
+	shutil.rmtree(dumpFilePath)
 
 if(model_name == "KMeans"):
 	# Load and parse the data
@@ -81,22 +87,13 @@ elif(model_name == "Regression"):
 	print("Weighted F(0.5) Score = %s" % metrics.weightedFMeasure(beta=0.5))
 	print("Weighted false positive rate = %s" % metrics.weightedFalsePositiveRate)
 
+	print (dumpFilePath);
 	#save output file path as JSON and dump into dumpFilePath
 	res = [('regression',dumpFilePath, precision, recall, f1Score)]
 	rdd = sc.parallelize(res)
 	SQLContext.createDataFrame(rdd).collect()
 	df = SQLContext.createDataFrame(rdd,['model_name','res_path', 'precision', 'recall', 'f1Score'])
 	df.toJSON().saveAsTextFile(dumpFilePath)
-
-
-
-
-#SQLContext = SQLContext(sc)
-#res = [('k_means',dumpFilePath)]
-#rdd = sc.parallelize(res)
-#SQLContext.createDataFrame(rdd).collect()
-#df = SQLContext.createDataFrame(rdd,['model_name','res_path'])
-#df.toJSON().saveAsTextFile(dumpFilePath)
 
 
 # Save and load model
