@@ -2,11 +2,11 @@
 basic version (NOT completed)
 
 1.Start spark via the command line with parameters, the input
-parameters are two local files path.
+parameters are intput/output files path.
 
 2.Use spark to train a machine learning model, and make predictions.
 
-3.Save result path as JSON
+3.Save result path as JSON into output path
 
 INSTRUCTION:
 
@@ -20,4 +20,4 @@ INSTRUCTION:
 
 3. Put Kmeans.py and kmeans_data.txt to some directory and run command line:
    YOUR_SPARK_PATH/spark-submit --master local[4] K_means.py
-   YOUR_INPUT_PATH/kmeans_data.txt
+   YOUR_INPUT_PATH/kmeans_data.txt YOUR_OUTPUT_PATH/
