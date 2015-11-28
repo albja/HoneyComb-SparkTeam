@@ -2,7 +2,7 @@
 
 import json
 
-file = open('YOUR_INPUT_FILE_PATH', 'r')
+file = open('YOUR_INPUT_FILE_PATH/ReadOutputDemo_data.txt', 'r')
 
 
 data = {}
