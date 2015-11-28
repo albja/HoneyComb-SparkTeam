@@ -9,6 +9,7 @@ parameters are two local files path.
 3.Save result path as JSON
 
 INSTRUCTION:
+
 1. Download Spark from :http://spark.apache.org/downloads.html (version:1.5.2)
    please choose the approriate package type according to Hadoop version.
 
