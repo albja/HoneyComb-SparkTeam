@@ -23,16 +23,17 @@ INSTRUCTION:
 4. Login Cluster: 
    ssh honeycomb@128.2.7.38 (password: ask teammates)
 
-5. Copy files into CLuster hdfs: 
+5. Copy files into CLuster local host: 
    scp source_file_name honeycomb@128.2.7.38:/home/honeycomb/SparkTeam
 
-6. Put Kmeans.py and kmeans_data.txt to some directory and run command line:
-   YOUR_SPARK_PATH/spark-submit --master local[4] K_means.py
-   YOUR_INPUT_PATH/kmeans_data.txt YOUR_OUTPUT_PATH/ YOUR_MODEL_NAME
+6. Put files into HDFS:
+   hdfs dfs -put LOCAL_FILE_PATH HDFS_FILE_PATH
+   e.g:
+   hdfs dfs -put /home/honeycomb/SparkTeam/sample_multiclass_classification_data_test.txt /user/honeycomb/sparkteam/input
 
-   MODEL_NAME: KMeans/Regression 
-   
-   For example:
+7. Put PySpark.py and train/test dataset into HDFS and run command line:
+   YOUR_SPARK_PATH/spark-submit PySpark.py YOUR_TRAIN_DATA_PATH YOUT_TEST_DATA_PATH YOUR_OUTPUT_PATH
+   e.g:
    /bin/spark-submit /home/honeycomb/SparkTeam/PySpark.py /user/honeycomb/sparkteam/input/sample_multiclass_classification_data.txt /user/honeycomb/sparkteam/output1 Regression
 
 Resource:
