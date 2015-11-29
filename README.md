@@ -20,7 +20,13 @@ INSTRUCTION:
 
 3. Install python 2.7(should also support Python 3)
 
-3. Put Kmeans.py and kmeans_data.txt to some directory and run command line:
+4. Login Cluster: 
+   ssh honeycomb@128.2.7.38 (password: ask teammates)
+
+5. Copy files into CLuster hdfs: 
+   scp source_file_name honeycomb@128.2.7.38:/home/honeycomb/SparkTeam
+
+6. Put Kmeans.py and kmeans_data.txt to some directory and run command line:
    YOUR_SPARK_PATH/spark-submit --master local[4] K_means.py
    YOUR_INPUT_PATH/kmeans_data.txt YOUR_OUTPUT_PATH/ YOUR_MODEL_NAME
 
