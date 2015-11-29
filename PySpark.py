@@ -27,11 +27,11 @@ dumpFilePath = sys.argv[3]				#output file path
 model_name = "Regression"				#model_name
 
 #if the directory already exists, delete it
-ifExisted = subprocess.call(["hdfs","dfs","-test","-d",dumpFilePath])
-if ifExisted == 0:
-	subprocess.call(["hdfs","dfs","-rm","-r", dumpFilePath])
-#if os.path.exists(dumpFilePath):
-	#(local) shutil.rmtree(outputFilePath)
+#ifExisted = subprocess.call(["hdfs","dfs","-test","-d",dumpFilePath])
+#if ifExisted == 0:
+#	subprocess.call(["hdfs","dfs","-rm","-r", dumpFilePath])
+if os.path.exists(dumpFilePath):
+	shutil.rmtree(dumpFilePath)
 	#hdfs.delete_file_dir(dumpFilePath)
 	
 
