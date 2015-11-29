@@ -24,14 +24,15 @@ SQLContext = SQLContext(sc)
 loadTrainingFilePath = sys.argv[1]		#tainning file path
 loadTestingFilePath = sys.argv[2]		#testing file path
 dumpFilePath = sys.argv[3]				#output file path
+hdfsFilePath = "/user/honeycomb/sparkteam/output"
 model_name = "Regression"				#model_name
 
 #if the directory already exists, delete it
-#ifExisted = subprocess.call(["hdfs","dfs","-test","-d",dumpFilePath])
-#if ifExisted == 0:
-#	subprocess.call(["hdfs","dfs","-rm","-r", dumpFilePath])
-if os.path.exists(dumpFilePath):
-	shutil.rmtree(dumpFilePath)
+ifExisted = subprocess.call(["hdfs","dfs","-test","-d",hdfsFilePath])
+if ifExisted == 0:
+	subprocess.call(["hdfs","dfs","-rm","-r", hdfsFilePath])
+#if os.path.exists(dumpFilePath):
+	#shutil.rmtree(dumpFilePath)
 	#hdfs.delete_file_dir(dumpFilePath)
 	
 
@@ -102,8 +103,9 @@ if(model_name == "Regression"):
 	rdd = sc.parallelize(res)
 	SQLContext.createDataFrame(rdd).collect()
 	df = SQLContext.createDataFrame(rdd,['precision', 'recall', 'f1Score'])
-	df.toJSON().saveAsTextFile(dumpFilePath)
-
+	df.toJSON().saveAsTextFile(hdfsFilePath)
+	tmpHdfsFilePath = hdfsFilePath + "/part-00000"
+	subprocess.call(["hadoop","fs","-copyToLocal", tmpHdfsFilePath, dumpFilePath])
 
 # Save and load model
 #clusters.save(sc, "myModel")
