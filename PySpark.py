@@ -98,11 +98,28 @@ if(model_name == "Regression"):
 	print("Weighted F(0.5) Score = %s" % metrics.weightedFMeasure(beta=0.5))
 	print("Weighted false positive rate = %s" % metrics.weightedFalsePositiveRate)
 
+	#return model parameters
+	res = [('1','Yes','TP Rate', metrics.truePositiveRate(0.0)),
+		   ('2','Yes','FP Rate', metrics.falsePositiveRate(0.0)),
+		   ('3','Yes','Precision', metrics.precision(0.0)),
+		   ('4','Yes','Recall', metrics.recall(0.0)),
+	       ('5','Yes','F-Measure', metrics.fMeasure(0.0, beta=1.0)),
+	       ('1','Yes','TP Rate', metrics.truePositiveRate(1.0)),
+		   ('2','Yes','FP Rate', metrics.falsePositiveRate(1.0)),
+	       ('3','Yes','Precision', metrics.precision(1.0)),
+		   ('4','Yes','Recall', metrics.recall(1.0)),
+	       ('5','Yes','F-Measure', metrics.fMeasure(1.0, beta=1.0)),
+	       ('1','Yes','TP Rate', metrics.truePositiveRate(2.0)),
+		   ('2','Yes','FP Rate', metrics.falsePositiveRate(2.0)),
+	       ('3','Yes','Precision', metrics.precision(2.0)),
+	       ('4','Yes','Recall', metrics.recall(2.0)),
+	       ('5','Yes','F-Measure', metrics.fMeasure(2.0, beta=1.0))]	
+
 	#save output file path as JSON and dump into dumpFilePath
-	res = [(precision, recall, f1Score)]
 	rdd = sc.parallelize(res)
 	SQLContext.createDataFrame(rdd).collect()
-	df = SQLContext.createDataFrame(rdd,['precision', 'recall', 'f1Score'])
+	df = SQLContext.createDataFrame(rdd,['Order','CLass','Name', 'Value'])
+
 	df.toJSON().saveAsTextFile(hdfsFilePath)
 	tmpHdfsFilePath = hdfsFilePath + "/part-00000"
 	subprocess.call(["hadoop","fs","-copyToLocal", tmpHdfsFilePath, dumpFilePath])
