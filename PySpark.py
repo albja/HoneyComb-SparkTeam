@@ -10,9 +10,7 @@ from pyspark.sql import SQLContext
 from pyspark.sql import DataFrame
 from numpy import array
 from math import sqrt
-
-#LogisticRegression
-
+import subprocess
 
 # Evaluate clustering by computing Within Set Sum of Squared Errors
 def error(point):
@@ -28,9 +26,14 @@ loadTestingFilePath = sys.argv[2]		#testing file path
 dumpFilePath = sys.argv[3]				#output file path
 model_name = "Regression"				#model_name
 
-#if the directory already exists, remove
-if os.path.exists(dumpFilePath):
-	shutil.rmtree(dumpFilePath)
+#if the directory already exists, delete it
+ifExisted = subprocess.call(["hdfs","dfs","-test","-d",dumpFilePath])
+if ifExisted == 0:
+	subprocess.call(["hdfs","dfs","-rm","-r", dumpFilePath])
+#if os.path.exists(dumpFilePath):
+	#(local) shutil.rmtree(outputFilePath)
+	#hdfs.delete_file_dir(dumpFilePath)
+	
 
 #if(model_name == "KMeans"):
 #	# Load and parse the data
@@ -78,7 +81,6 @@ if(model_name == "Regression"):
 	print("Precision = %s" % precision)
 	print("Recall = %s" % recall)
 	print("F1 Score = %s" % f1Score)
-	#print(confusion_matrix)
 
 
 	# Statistics by class
@@ -95,7 +97,6 @@ if(model_name == "Regression"):
 	print("Weighted F(0.5) Score = %s" % metrics.weightedFMeasure(beta=0.5))
 	print("Weighted false positive rate = %s" % metrics.weightedFalsePositiveRate)
 
-	print (dumpFilePath);
 	#save output file path as JSON and dump into dumpFilePath
 	res = [(precision, recall, f1Score)]
 	rdd = sc.parallelize(res)

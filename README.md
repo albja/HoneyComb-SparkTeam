@@ -45,7 +45,7 @@ INSTRUCTION:
    
    e.g:
    
-   /bin/spark-submit /home/honeycomb/SparkTeam/PySpark.py /user/honeycomb/sparkteam/input/sample_multiclass_classification_data.txt /user/honeycomb/sparkteam/output1 Regression
+   /bin/spark-submit /home/honeycomb/SparkTeam/PySpark.py /user/honeycomb/sparkteam/input/sample_multiclass_classification_data.txt /user/honeycomb/sparkteam/input/sample_multiclass_classification_data_test.txt /user/honeycomb/sparkteam/output1
 
 Resource:
 
