@@ -24,9 +24,15 @@ INSTRUCTION:
    ssh honeycomb@128.2.7.38 (password: ask teammates)
 
 5. Copy files into CLuster local host: 
+   
    scp source_file_name honeycomb@128.2.7.38:/home/honeycomb/SparkTeam
 
+   e.g:
+
+   scp /Users/jacobliu/PySpark.py honeycomb@128.2.7.38:/home/honeycomb/SparkTeam
+   
 6. Put files into HDFS:
+   
    hdfs dfs -put LOCAL_FILE_PATH HDFS_FILE_PATH
    
    e.g:
@@ -34,6 +40,7 @@ INSTRUCTION:
    hdfs dfs -put /home/honeycomb/SparkTeam/sample_multiclass_classification_data_test.txt /user/honeycomb/sparkteam/input
 
 7. Put PySpark.py and train/test dataset into HDFS and run command line:
+   
    YOUR_SPARK_PATH/spark-submit PySpark.py YOUR_TRAIN_DATA_PATH YOUT_TEST_DATA_PATH YOUR_OUTPUT_PATH
    
    e.g:

@@ -56,7 +56,6 @@ if(model_name == "Regression"):
 	# Split data into training (60%) and test (40%)
 	#training, test = data.randomSplit([0.6, 0.4], seed = 11L)
 	
-
 	# Load testing data in LIBSVM format
 	testdata = MLUtils.loadLibSVMFile(sc, loadTestingFilePath)
 
@@ -98,10 +97,10 @@ if(model_name == "Regression"):
 
 	print (dumpFilePath);
 	#save output file path as JSON and dump into dumpFilePath
-	res = [(precision, recall, f1Score,metrics.confusionMatrix())]
+	res = [(precision, recall, f1Score)]
 	rdd = sc.parallelize(res)
 	SQLContext.createDataFrame(rdd).collect()
-	df = SQLContext.createDataFrame(rdd,['precision', 'recall', 'f1Score','confusion_matrix'])
+	df = SQLContext.createDataFrame(rdd,['precision', 'recall', 'f1Score'])
 	df.toJSON().saveAsTextFile(dumpFilePath)
 
 
