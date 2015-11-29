@@ -28,16 +28,12 @@ INSTRUCTION:
 
 6. Put files into HDFS:
    hdfs dfs -put LOCAL_FILE_PATH HDFS_FILE_PATH
-   
    e.g:
-   
    hdfs dfs -put /home/honeycomb/SparkTeam/sample_multiclass_classification_data_test.txt /user/honeycomb/sparkteam/input
 
 7. Put PySpark.py and train/test dataset into HDFS and run command line:
    YOUR_SPARK_PATH/spark-submit PySpark.py YOUR_TRAIN_DATA_PATH YOUT_TEST_DATA_PATH YOUR_OUTPUT_PATH
-   
    e.g:
-   
    /bin/spark-submit /home/honeycomb/SparkTeam/PySpark.py /user/honeycomb/sparkteam/input/sample_multiclass_classification_data.txt /user/honeycomb/sparkteam/output1 Regression
 
 Resource:
