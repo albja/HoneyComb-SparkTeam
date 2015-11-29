@@ -54,14 +54,15 @@ if ifExisted == 0:
 
 if(model_name == "Regression"):
 	# Load training data in LIBSVM format
-	traindata = MLUtils.loadLibSVMFile(sc, loadTrainingFilePath)
-	traindata.cache()
+	data = MLUtils.loadLibSVMFile(sc, loadTrainingFilePath)
+	
 	
 	# Split data into training (60%) and test (40%)
-	#training, test = data.randomSplit([0.6, 0.4], seed = 11L)
-	
+	traindata, testdata = data.randomSplit([0.6, 0.4], seed = 11L)
+	traindata.cache()
+
 	# Load testing data in LIBSVM format
-	testdata = MLUtils.loadLibSVMFile(sc, loadTestingFilePath)
+	#testdata = MLUtils.loadLibSVMFile(sc, loadTestingFilePath)
 
 	# Run training algorithm to build the model
 	model = LogisticRegressionWithLBFGS.train(traindata, numClasses=3)
@@ -119,6 +120,10 @@ if(model_name == "Regression"):
 	rdd = sc.parallelize(res)
 	SQLContext.createDataFrame(rdd).collect()
 	df = SQLContext.createDataFrame(rdd,['Order','CLass','Name', 'Value'])
+
+	tempDumpFilePath = dumpFilePath + "/part-00000"
+	if os.path.exists(tempDumpFilePath):
+		os.remove(tempDumpFilePath)
 
 	df.toJSON().saveAsTextFile(hdfsFilePath)
 	tmpHdfsFilePath = hdfsFilePath + "/part-00000"
